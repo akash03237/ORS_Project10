@@ -1,0 +1,67 @@
+<div class="container row">
+
+    <div class="col-md-12">
+
+        <h1 class="text-primary pt-4">Upload Image Test Page</h1>
+
+    </div>
+
+</div>
+
+<div class="container row pl-4">
+ <div class="form-group">
+        <input type="file" id="file" (change)="handleFileInput($event.target.files)">
+    </div>
+
+    <div class="col-md-6">
+
+        <input type="button" class="btn btn-success" (click)="onUpload()" value="upload">
+
+    </div>
+
+</div>
+
+<hr />
+<!--   
+  <div class="container row">
+  
+      <div class="col-md-12">
+  
+          <div *ngIf=message>{{message}}</div>
+  
+      </div>
+  
+  </div>
+  
+  
+  <div class="container row">
+  
+      <div class="col-md-6">
+
+          <input type="text" class="form-control" id="name" placeholder="image name" [(ngModel)]="imageName"
+  
+              name="name" />
+  
+      </div>
+  
+      <div class="col-md-6">
+  
+          <input type="button" (click)="getImage()" value="Get Image">
+  
+      </div>
+  
+  </div>
+  
+  
+  <div class="container row">
+  
+      <div class="col-md-12">
+            <div *ngIf=retrievedImage>
+  
+              <img [src]="retrievedImage">
+  
+          </div>
+  
+      </div>
+  
+  </div> -->

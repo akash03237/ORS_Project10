@@ -1,0 +1,167 @@
+<app-navbar></app-navbar>
+
+<style>
+  .grad{
+ background-image: linear-gradient(to bottom right, rgb(32, 168, 168), rgb(219, 231, 237));
+ background-repeat: no repeat;
+ background-size: 100%;
+ padding-bottom: 25px
+ ;
+ }
+</style>
+
+<div class="row " style="padding-top: 3%; padding-bottom:3%;
+background: url(assets/files/wall.jpg) no-repeat center center;
+background-attachment: fixed;
+background-size: cover;width:auto;
+  height: auto;">
+
+  <div class="col-sm-4"></div>
+  <div class="col-sm-4">
+    <div class="card">
+      <div class="card-body shadow-lg grad">
+        <form>
+          <h2 *ngIf="!form.data.id>0" class="text-primary font-weight-bold">{{'Add TimeTable' | translate }}</h2>
+          <h2 *ngIf="form.data.id>0" class="text-primary font-weight-bold">{{'Update TimeTable' | translate }}</h2>
+          <div *ngIf="form.error && form.message != null" class="alert alert-danger alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {{form.message}}
+          </div>
+          <div *ngIf="!form.error && form.message != null" class="alert alert-success alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {{form.message}}
+          </div>
+
+          <div style="padding-top:3%">
+            <span class="pt-2"><b>{{'Course' | translate }}</b>
+              <span class="required-field"></span></span>
+            <div class="col-sm-12">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text"><i class="fa fa-file grey-text"></i> </div>
+                </div>
+                <select class="form-control" name="courseId" [(ngModel)]="form.data.courseId"
+                  style="cursor: pointer;">
+                  <option [ngValue]="" value="undefined">{{' Select Course' | translate }}</option>
+                  <option *ngFor="let obj of form.preload.courseList" [value]="obj.key">{{obj.value}}</option>
+                </select>
+              </div>
+            </div>
+          
+          </div>
+
+          <div style="padding-top:3%">
+            <span class="pt-2"><b>{{'Subject' | translate }}</b>
+              <span class="required-field"></span></span>
+            <div class="col-sm-12">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text"><i class="fa fa-globe grey-text"></i> </div>
+                </div>
+                <select class="form-control" name="subjectId" [(ngModel)]="form.data.subjectId" style="cursor: pointer;">
+                  <option [ngValue]="" value="undefined">{{' Select Subject' | translate }}</option>
+            
+                  <option *ngFor="let obj of form.preload.subjectList" [value]="obj.key">{{obj.value}}</option>
+                </select>
+              </div>
+              <span class="alertRedColor"> {{form.inputerror.subject}} </span>
+            </div>
+          </div>
+
+          <div style="padding-top:3%">
+            <span class="pt-2"><b>{{'Semester' | translate }}</b>
+              <span class="required-field"></span></span>
+            <div class="col-sm-12">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text"><i class="fa fa-list-ol grey-text"></i> </div>
+                </div>
+                <select class="form-control" name="semester" [(ngModel)]="form.data.semester" style="cursor: pointer;">
+                  <option [ngValue]="" value="undefined"> {{'Please select' | translate}} </option>
+                  <option value="1 Semester">1 Semester</option>
+                  <option value="2 Semester">2 Semester</option>
+                  <option value="3 Semester">3 Semester</option>
+                  <option value="4 Semester">4 Semester</option>
+                  <option value="5 Semester">5 Semester</option>
+                  <option value="6 Semester">6 Semester</option>
+                  <option value="7 Semester">7 Semester</option>
+                  <option value="8 Semester">8 Semester</option>
+                </select>
+              </div>
+              <span class="alertRedColor"> {{form.inputerror.semester}} </span>
+            </div>
+          </div>
+
+          <div style="padding-top:3%">
+            <span class="pt-2"><b>{{'Exam Date' | translate }}</b>
+              <span class="required-field"></span></span>
+            <div class="col-sm-12">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text"><i class="fa fa-table grey-text"></i> </div>
+                </div>
+                <input type="date" name="examDate" [value]="form.data.examDate | date:'yyyy-MM-dd'"
+                (input)="form.data.examDate=parseDate($event.target.value)"
+                class="form-control form-control-sm" required />
+              </div>
+              <span class="alertRedColor"> {{form.inputerror.examDate}} </span>
+            </div>
+          </div>
+
+          <div style="padding-top:3%">
+            <span class="pt-2"><b>{{'Exam Time' | translate }}</b>
+              <span class="required-field"></span></span>
+            <div class="col-sm-12">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text"><i class="fa fa-clock-o grey-text"></i> </div>
+                </div>
+                <select class="form-control" name="examTime" [(ngModel)]="form.data.examTime">
+                  <option [ngValue]="" value="undefined">{{' Select examTime' | translate }}</option>
+            
+                  <option selected disabled>{{'Please select' | translate }}</option>
+                  <option value="08:00 AM to 11:00 AM">08:00 AM to 11:00 AM</option>
+                  <option value="12:00PM to 3:00PM">12:00PM to 3:00PM</option>
+                  <option value="3:00PM to 6:00PM">3:00PM to 6:00PM</option>
+                </select>
+              </div>
+              <span class="alertRedColor"> {{form.inputerror.examTime}} </span>
+            </div>
+          </div>
+
+          <div style="padding-top:3%">
+            <span><b>{{'Description' | translate }}</b>
+              <span class="required-field"></span></span>
+            <div class="col-sm-12">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text"><i class="fa fa-bars grey-text "></i> </div>
+                </div>
+                <textarea  name="description" [(ngModel)]="form.data.description" class="form-control"
+                  placeholder="{{'Enter Description' | translate }}"></textarea>
+              </div>
+            </div>
+            <span class="alertRedColor">{{form.inputerror.description}}</span>
+          </div>
+
+          <div class="row pt-3 pl-3 pb-3">
+            <div class="pt-2">
+              <button *ngIf="!form.data.id>0"  (click)="submit()" [disabled]="!validate()" class="btn btn-success mr-2">
+                {{'Save' | translate }}</button>
+            </div>
+            <div class="pt-2">
+              <button  *ngIf="form.data.id>0"  (click)="submit()" class="btn btn-success mr-2">
+              {{'Update' | translate }}</button>
+            </div>
+           
+           
+            <div class="pl-3 pt-2">
+              <button (click)="forward('/timetablelist')" type="button" class="btn btn-warning mr-1">{{'List' | translate }}
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div><app-footer></app-footer>

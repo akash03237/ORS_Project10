@@ -1,0 +1,142 @@
+<app-navbar></app-navbar>
+<div class="row " style="padding-top: 3%; padding-bottom:3%; background-image: url(../../assets/files/gettyimages-1132439283-640x640.jpg);
+background-attachment: fixed;
+background-size: cover;width:auto;height: auto;">
+
+  <div class="col-sm-4"></div>
+  <div class="col-sm-4">
+    <div class="card">
+      <div class="card-body shadow-lg">
+        <form>
+          <h2 *ngIf="!form.data.id>0" class="text-primary font-weight-bold">{{'Add Message' | translate}}</h2>
+          <h2 *ngIf="form.data.id>0" class="text-primary font-weight-bold">{{'Update Message' | translate}} </h2>
+
+
+          <!-- <div *ngIf="form.error" class="alert alert-danger alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {{form.message}}
+          </div> -->
+          <div *ngIf="!form.error && form.message != null" class="alert alert-success alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {{form.message}}
+          </div>
+
+          <div style="padding-top:3%">
+            <span class="pt-2"><b>{{'Type' | translate}}</b>
+              <span class="required-field"></span></span>
+            <div class="col-sm-12">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text"><i class="fa fa-comment grey-text"></i> </div>
+                </div>
+                <input type="text" name="type" [(ngModel)]="form.data.type" class="form-control"
+                  placeholder="{{'Enter Message Type' | translate}}">
+              </div>
+            </div>
+            <span class="alertRedColor"> {{form.inputerror.type}} </span>
+          </div>
+
+          <div style="padding-top:3%">
+            <span class="pt-2"><b>{{'Code' | translate}}</b>
+              <span class="required-field"></span></span>
+            <div class="col-sm-12">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text"><i class="fa fa-commenting grey-text"></i> </div>
+                </div>
+                <select class="form-control" name="code" id="code" [(ngModel)]="form.data.code"
+                  style="cursor: pointer;">
+                  <option selected="true">{{'Please select'  | translate }}</option>
+                  <option value="U-FP">U-FP </option>
+                  <option value="U-REG">U-REG </option>
+                  <option value="U-CP">U-CP</option>
+                </select>
+
+              </div>
+            </div>
+            <span class="alertRedColor">{{form.inputerror.code}}</span>
+          </div>
+
+          <div style="padding-top:3%">
+            <span class="pt-2"><b>{{'Subject' | translate}}</b>
+              <span class="required-field"></span></span>
+            <div class="col-sm-12">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text"><i class="fa fa-comments grey-text"></i> </div>
+                </div>
+                <input type="text" name="subject" [(ngModel)]="form.data.subject" class="form-control"
+                  placeholder="{{'Enter Message Subject'| translate}}">
+              </div>
+            </div>
+            <span class="alertRedColor"> {{form.inputerror.subject}} </span>
+          </div>
+
+          <div style="padding-top:3%">
+            <span class="pt-2"><b>{{'Body' | translate}}</b>
+              <span class="required-field"></span></span>
+            <div class="col-sm-12">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text"><i class="fa fa-envelope grey-text"></i> </div>
+                </div>
+                <input type="text" name="body" [(ngModel)]="form.data.body" class="form-control"
+                  placeholder="{{'Enter Message Body' | translate}}">
+              </div>
+            </div>
+            <span class="alertRedColor"> {{form.inputerror.body}} </span>
+          </div>
+
+          <div style="padding-top:3%">
+            <span class="pt-2"><b>{{'Status' | translate}}</b>
+              <span class="required-field"></span></span>
+            <div class="col-sm-12">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text"><i class="fa fa-flag grey-text"></i> </div>
+                </div>
+                <input type="text" name="status" [(ngModel)]="form.data.status" class="form-control"
+                  placeholder="{{'Enter Message Status' | translate}}">
+              </div>
+            </div>
+            <span class="alertRedColor"> {{form.inputerror.status}} </span>
+          </div>
+
+          <div style="padding-top:3%">
+            <span class="pt-2"><b>{{'HTML' | translate}}</b>
+              <span class="required-field"></span></span>
+            <div class="col-sm-12">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text"><i class="fa fa-venus grey-text"></i> </div>
+                </div>
+                <input type="text" name="html" [(ngModel)]="form.data.html" class="form-control"
+                  placeholder="{{'Enter Message HTML' | translate}}">
+              </div>
+            </div>
+            <span class="alertRedColor"> {{form.inputerror.html}} </span>
+          </div>
+
+          <div class="row pt-3 pl-3 pb-3">
+            <div class="pt-2">
+              <button *ngIf="!form.data.id>0" (click)="submit()"  class="btn btn-success mr-2">
+                {{'Save' | translate}}</button>
+            </div>
+
+            <div class="pt-2">
+              <button *ngIf="form.data.id>0" (click)="submit()" class="btn btn-success mr-2">
+                {{'Update' | translate}}</button>
+            </div>
+
+            <div class="pt-2">
+              <button (click)="forward('/messagelist')" type="button"
+                class="btn btn-warning mr-1">{{'List' | translate}}
+              </button></div>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

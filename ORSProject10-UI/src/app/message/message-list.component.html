@@ -1,0 +1,97 @@
+<app-navbar></app-navbar>
+<div class="content-wrapper" style="padding-top: 3%; padding-bottom: 15%; background-image: url(../../assets/files/gettyimages-1132439283-640x640.jpg); background-repeat: no-repeat, repeat;
+background-attachment: fixed;
+background-size: cover;width:auto;
+  height: auto;">
+  <div class="container-fluid">
+
+    <div class="panel panel-primary">
+      <div class="panel-heading" style="height: 50px;">
+        <div class="col-sm-6 p-1">
+          <h4 class="text-primary font-weight-bold">{{'Message List' | translate}}</h4>
+        </div>
+      </div>
+
+      <div class="row p-1">
+
+        <div class="col-sm-3">
+          <input type="text" class="form-control" [(ngModel)]="form.searchParams.subject"
+            placeholder="{{'Search Subject' | translate}}">
+        </div>
+        <div class="col-sm-3">
+          <input type="text" class="form-control" [(ngModel)]="form.searchParams.body"
+            placeholder="{{'Search Body' | translate}}">
+        </div>
+
+        <div class="col-sm-1">
+          <button (click)="submit()" class="btn btn-primary">
+            {{'Search' | translate}}</button></div>
+        <div class="col=sm-1">
+          <button (click)="forward('/message')" type="button" class="btn btn-success">{{'Add Message'| translate}}
+          </button></div>
+
+      </div>
+
+      <div class="row p-1">
+        <div class="col-lg-1">
+          <button (click)="previous()" [disabled]="form.pageNo == 0" class="btn btn-info"> {{'Previous'| translate}}
+          </button>
+        </div>
+        <div class="col-lg-1">
+          <button (click)="next()" class="btn btn-info">{{'Next'| translate}} </button>
+        </div>
+        <div class="col-lg-2">
+
+        </div>
+      </div>
+
+      <div *ngIf="form.error" class="alert alert-danger alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{form.message}}
+      </div>
+      <div *ngIf="!form.error && form.message != null" class="alert alert-success alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{form.message}}
+      </div>
+
+      <div class="p-1">
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped table-hover">
+            <thead class="thead-light text-uppercase">
+              <tr>
+                <th>{{'S.No'| translate}}</th>
+                <th>{{'Code'| translate}}</th>
+                <th>{{'Subject' | translate}}</th>
+                <th>{{'Body'| translate}}</th>
+                <th>{{'Type'| translate}}</th>
+                <th>{{'Status'| translate}}</th>
+                <th>#</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let m of form.list; let i = index">
+                <td> {{(form.pageNo*5)+i+ 1}} </td>
+                <td> {{ m.code }} </td>
+                <td> {{ m.subject }} </td>
+                <td> {{ m.body }} </td>
+                <td> {{ m.type }} </td>
+                <td> {{ m.status }} </td>
+                <td>
+                  <a (click)="forward( '/message/' +  m.id)" style="cursor: pointer;">
+                    <i class="fa fa-edit text-info"></i>
+                  </a>
+                  /
+                  <a (click)="delete(m.id)" style="cursor: pointer;">
+                    <i class="fa fa-trash text-danger"></i>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

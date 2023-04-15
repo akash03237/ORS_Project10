@@ -1,0 +1,141 @@
+<app-navbar></app-navbar>
+<div  style="
+background: url(assets/files/gettyimages-1132439283-640x640.jpg) no-repeat center center;
+background-attachment: fixed;
+background-size: cover;
+padding-top: 5%;
+padding-bottom: 24%;
+width:100%;
+  height: 100;">
+  <form name="rollForm" (ngSubmit)="go()">
+    <div align="center">
+      <div style="font-size: 80px;">
+      <p class="font-weight-bold text-primary">{{'Get Marksheet' | translate }}</p>
+    </div>
+    </div>
+    <div class="row pt-4 pb-4">
+      <div class="col-sm-4 "></div>
+      <div class="col-md-2 col-sm-2 col-xs-2">
+        <input type="text" name="rollNo" id="rollNo" class="form-control" [(ngModel)]="form.data.rollNo"
+          placeholder="{{'Enter Roll Number' | translate }}">&emsp;</div>
+      <div class="col-md-2 col-sm-2 col-xs-2">
+        <button type="submit" [disabled]="!validate()" class="btn btn-success mr-2">
+          {{'Search' | translate }}</button>
+        <a class="btn btn-primary" [routerLink]="['/getmarksheet']"> {{'Reset' | translate}} </a>
+        
+        &emsp;
+
+      </div>
+      <div class="col-md-3 col-sm-3 col-xs-3"></div>
+
+    </div>
+  </form>
+  <div *ngIf="form.error" class="alert alert-danger alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    {{form.message}}
+  </div>
+  <div *ngIf="!form.error && form.message != null" class="alert alert-success alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    {{form.message}}
+  </div>
+
+  <div class="container" *ngIf="form.list.rollNo!= null" >
+
+    <table width="100%" class="table table-bordered table-striped table-hover" border="3px">
+      <tr>
+        <th id="po1" colspan="2">{{'RollNO' | translate }}</th>
+        <td id="po1" colspan="3">{{form.list.rollNo}}</td>
+      </tr>
+      <tr>
+        <th id="po1" colspan="2">{{'Name' | translate }}</th>
+        <td id="po1" colspan="3">{{form.list.name}}</td>
+      </tr>
+      <tr>
+        <th id="po1">{{'Marks' | translate }}</th>
+        <th align="center" id="po1">{{'Max Marks' | translate }}</th>
+        <th  align="center" id="po1">{{'Min Marks' | translate }}</th>
+        <th  align="center" id="po1">{{'Marks Obtain' | translate }}</th>
+      </tr>
+      <tr>
+        <th id="po1" colspan="2">{{'Subject' | translate }}</th>
+        
+      </tr>
+      <tr>
+        <th id="po1">{{'Physics' | translate }}</th>
+        <td align="center">100</td>
+        <td align="center">35</td>
+        <td id="po1" align="center">
+          <!-- <span style="color: red;">{{form.list.physics}}*</span> -->
+          <span [ngStyle]="{'color': (form.list.physics >35) ? 'green': 'red' }">{{form.list.physics}}</span>
+          
+        </td>
+      </tr>
+      <tr>
+        <th id="po1">{{'Chemistry' | translate }}</th>
+        <td align="center">100</td>
+        <td align="center">35</td>
+        <td id="po1" align="center">
+          <!-- <span style="color: red;">{{form.list.chemistry}}*</span>  -->
+          <span [ngStyle]="{'color': (form.list.chemistry >35) ? 'green': 'red' }">{{form.list.chemistry}}</span>
+        </td>
+      </tr>
+      <tr>
+        <th id="po1">{{'Maths' | translate }}</th>
+        <td align="center">100</td>
+        <td align="center">35</td>
+        <td id="po1" align="center">
+          <!-- <span style="color: red;">{{form.list.maths}}*</span> -->
+          <span [ngStyle]="{'color': (form.list.maths >35) ? 'green': 'red' }">{{form.list.maths}}</span>
+        </td>
+      </tr>
+      <tr>
+        <th id="po1" colspan="2">{{'Total' | translate }}</th>
+
+        <td id="po1" colspan="3" align="center">{{form.list.maths+form.list.physics+form.list.chemistry}}</td>
+      </tr>
+      <tr>
+
+        <th id="po1" colspan="2">{{'Percentage' | translate }}</th>
+
+        <td id="po1" colspan="3" align="center">
+          {{((form.list.physics+form.list.maths+form.list.chemistry)*100)/300 | number:'2.0-2' }}%
+        
+          
+        
+        
+        </td>
+      </tr>
+     <!--  <tr>
+        <th id="po1" align="center" colspan="2">
+          <font color="blue">{{'Grade' | translate }}</font>
+        </th>
+        <td id="po1" align="center" colspan="3">
+          <font color="green"><b>{{'PASS' | translate }}</b></font>
+        </td>
+      </tr> -->
+
+      <!-- <tr>
+        <th id="po1" align="center" colspan="2">
+          <font color="blue">{{'Final Grade' | translate }}</font>
+          <font color="red"><b>F</b></font>
+        </th>
+        <td id="po1" align="center" colspan="3">
+          <font color="red"><b>{{'FAIL' | translate }}</b></font>
+        </td>
+      </tr> -->
+      <tr>
+        <th id="po1" align="center" colspan="2">
+          <font color="blue">{{'Final Grade' | translate }}</font>         
+        </th>
+        <td id="po1" align="center" colspan="3"  *ngIf="((form.list.physics+form.list.maths+form.list.chemistry)*100)/300 > 35; else elseBlock">
+
+          <font color="green"><b>{{'Pass' | translate }}</b></font>
+        </td>
+        <ng-template #elseBlock><td id="po1" align="center" colspan="3" ><font color="red"><b>{{'Fail' | translate }}</b></font></td></ng-template>
+      </tr>
+
+    </table>
+    
+</div><div style="position: relative; clear: both;">
+  <app-footer></app-footer>
+</div>

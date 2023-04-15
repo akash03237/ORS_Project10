@@ -1,0 +1,126 @@
+<app-navbar></app-navbar>
+<div class="content-wrapper" style="padding-top: 3%;padding-bottom: 15;
+ background: url(assets/files/back1.jpg) no-repeat center center;
+background-attachment: fixed;
+background-size: cover;width:auto;
+  height: 90vh;" >
+    <div class="container-fluid">
+
+        <div class="panel panel-primary">
+            <div class="panel-heading" style="height: 50px;">
+                
+                <div class="text-center">
+                    <h1 class="text-primary font-weight-bold">{{'Role List' | translate}}</h1>
+                  </div>
+                </div>
+          
+                <div class="row p-1">
+                  <div class="col-sm-1"></div>
+                  <div class="col-sm-2">
+                    <input type="text" class="form-control" [(ngModel)]="form.searchParams.name"
+                      placeholder="{{'Search Name' | translate}}">
+          
+                  </div>
+                  <!-- <div class="col-sm-2">
+                    <input type="text" class="form-control" [(ngModel)]="form.searchParams.loginId" placeholder="{{'Search Email' | translate}}">
+                  </div> -->
+                  <div class="col-sm-2">
+                    <input type="text" class="form-control" [(ngModel)]="form.searchParams.description"
+                      placeholder="{{'Search Description' | translate}}">
+          
+                  </div>
+
+                  <div class="col-sm-2">
+
+                    <select class="form-control" name="id" [(ngModel)]="form.searchParams.id" aria-label="ngSelected">
+                      <option [ngValue]="" value="undefined">{{' Select Role' | translate }}</option>
+                      <option *ngFor="let obj of form.preload.roleList" [value]="obj.key">{{obj.value}}</option>
+                    </select>
+                  </div>
+          
+                  
+                 
+                  <div class="col-sm-1 ml-3">
+                    <button (click)="submit()" class="btn btn-primary">
+                      {{'Search' | translate }}</button>
+                  </div>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <div class="col-lg-2 ml-4">
+                    <button (click)="forward('/role')" type="button" class="btn btn-success">{{'Add Role' | translate}}
+                    </button>
+                  </div>
+          
+                  <div class="col-sm-1">
+                    <button (click)="deleteMany()" class="btn btn-danger">
+                      {{'Delete'| translate}}</button>
+                  </div>
+                </div>
+            <div *ngIf="form.error" class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                {{form.message}}
+              </div>
+              <div *ngIf="!form.error && form.message != null" class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                {{form.message}}
+              </div>
+
+          
+
+            <div class="p-1">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-hover font-weight-bold text-primary">
+                        <thead class="thead-light text-uppercase">
+                            <tr>
+                                <th><input type="checkbox" [(ngModel)]="isMasterSel" name="list_name" value="h1" (change)="checkUncheckAll($event)"/></th>
+                                <th>{{'S.No' | translate }}</th>
+                                <th>{{'Name' | translate }}</th>
+                                <th>{{'Description' | translate }}</th>
+                                <th>{{'Edit' | translate}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let m of form.list; let i = index">
+                                <td> <input type="checkbox"  #checkboxes (change)="checklistUpdate()"  name="list_name"  id="{{m.id}}" value="{{isMasterSel}}"/>
+                                </td>
+                                <td> {{(form.pageNo*5)+i+ 1}} </td>
+                                <td> {{ m.name }} </td>
+                                <td> {{ m.description }} </td>
+                                <td>
+                                    <a (click)="forward( '/role/' +  m.id)" style="cursor: pointer;">
+                                        <i class="fa fa-edit text-info"></i>
+                                    </a>
+                                    <!-- /
+                                    <a (click)="delete(m.id)" style="cursor: pointer;">
+                                        <i class="fa fa-trash text-danger"></i>
+                                    </a> -->
+                                </td>
+                                
+                            </tr>
+                        </tbody>
+                    </table>
+                </div><table style="width: 100%;">
+                    <tr>
+                      <td style="width: 50%;">
+                  <button (click)="previous()" [disabled]="form.pageNo == 0" class="btn btn-info"> {{'Previous' | translate
+                    }} </button></td>
+                    <td *ngIf="form.list.length!=0" style="width: 50%;"></td>
+                    <td *ngIf="form.list.length==0" style="width: 50%;">
+                      <a class="btn btn-warning mr-1" [routerLink]="['/rolelist']" (click)="exit()">{{'Back' | translate}}</a></td>
+        
+          
+          
+                
+                    <td><button (click)="next()" [disabled]="nextList==0" type="button" class="btn btn-info"> {{'Next' |
+                      translate }}</button></td>
+                    </tr>
+                    </table>
+              
+                    
+               
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<app-footer></app-footer>

@@ -1,0 +1,130 @@
+<app-navbar></app-navbar>
+<style>
+  .grad{
+ background-image: linear-gradient(to bottom right, rgb(32, 168, 168), rgb(219, 231, 237));
+ background-repeat: no repeat;
+ background-size: 100%;
+ padding-bottom: 25px
+ ;
+ }
+</style>
+
+<div class="row " style="padding-top: 3%; padding-bottom:3%;
+background: url(assets/files/wall.jpg) no-repeat center center;
+background-attachment: fixed;
+background-size: cover;width:auto;
+  height: auto;">
+
+  <div class="col-sm-4"></div>
+  <div class="col-sm-4">
+    <div class="card">
+      <div class="card-body shadow-lg grad">
+        <form>
+          <h2 *ngIf="!form.data.id>0" class="text-primary font-weight-bold" style="text-align: center;">{{'Add College' | translate }}</h2>
+          <h2 *ngIf="form.data.id>0" class="text-primary font-weight-bold" style="text-align: center;">{{'Update College' | translate }}</h2>
+
+          <div *ngIf="form.error && form.message != null" class="alert alert-danger alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {{form.message}}
+          </div>
+          <div *ngIf="!form.error && form.message != null" class="alert alert-success alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {{form.message}}
+          </div>
+
+          <div style="padding-top:3%">
+            <span class="pt-2"><b>{{'Name' | translate }}</b>
+              <span class="required-field"></span></span>
+            <div class="col-sm-12">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text"><i class="fa fa-user grey-text"></i> </div>
+                </div>
+                <input type="text" name="name" [(ngModel)]="form.data.name" class="form-control"
+                  placeholder="{{'Enter Name' | translate }}">
+              </div>
+            </div><span class="alertRedColor"> {{form.inputerror.name}} </span>
+          </div>
+
+          <div style="padding-top:3%">
+            <span class="pt-2"><b>{{'Address' | translate }}</b>
+              <span class="required-field"></span></span>
+            <div class="col-sm-12">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text"><i class="fa fa-map-marker grey-text"></i> </div>
+                </div>
+                <input type="text" name="addr" [(ngModel)]="form.data.address" class="form-control"
+                  placeholder="{{'Enter Address' | translate }}">
+              </div>
+              <span class="alertRedColor"> {{form.inputerror.address}} </span>
+            </div>
+          </div>
+
+          <div style="padding-top:3%">
+            <span class="pt-2"><b>{{'City' | translate }}</b>
+              <span class="required-field"></span></span>
+            <div class="col-sm-12">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text"><i class="fa fa-location-arrow grey-text"></i> </div>
+                </div>
+                <input type="text" name="city" [(ngModel)]="form.data.city" class="form-control"
+                  placeholder="{{'Enter City' | translate }}">
+              </div>
+              <span class="alertRedColor"> {{form.inputerror.city}} </span>
+            </div>
+          </div>
+
+          <div style="padding-top:3%">
+            <span class="pt-2"><b>{{'State' | translate }}</b>
+              <span class="required-field"></span></span>
+            <div class="col-sm-12">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text"><i class="fa fa-address-card grey-text"></i> </div>
+                </div>
+                <input type="text" name="state" [(ngModel)]="form.data.state" class="form-control"
+                  placeholder="{{'Enter State' | translate }}">
+              </div>
+              <span class="alertRedColor"> {{form.inputerror.state}} </span>
+            </div>
+          </div>
+
+          <div style="padding-top:3%">
+            <span class="pt-2"><b>{{'Phone No.' | translate }}</b>
+              <span class="required-field"></span></span>
+            <div class="col-sm-12">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text"><i class="fa fa-phone grey-text"></i> </div>
+                </div>
+                <input type="text" name="phnNo" [(ngModel)]="form.data.phoneNo" class="form-control"
+                  placeholder="{{'Enter Phone No.' | translate }}">
+              </div>
+              <span class="alertRedColor"> {{form.inputerror.phoneNo}} </span>
+            </div>
+          </div>
+
+          <div class="row pt-3 pl-3 pb-3">
+            <div class="pt-2">
+              <button *ngIf="!form.data.id>0" (click)="submit()" [disabled]="!validate()" class="btn btn-success mr-2">
+                {{'Save' | translate }}</button>
+            </div>
+            <div class="pt-2">
+              <button *ngIf="form.data.id>0" (click)="submit()" class="btn btn-success mr-2">
+                {{'Update' | translate }}</button>
+            </div>
+
+            <div class="pl-3 pt-2">
+              <button (click)="forward('/collegelist')" type="button"
+                class="btn btn-warning mr-1">{{'List' | translate }}
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

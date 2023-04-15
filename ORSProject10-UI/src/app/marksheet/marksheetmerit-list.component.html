@@ -1,0 +1,83 @@
+<app-navbar></app-navbar>
+<style>
+  .grad{
+  background-image: linear-gradient(to bottom right, rgb(32, 168, 168), rgb(219, 231, 237));
+  background-repeat: no repeat;
+  background-size: 100%;
+  padding-bottom: 10px;
+  }
+  
+</style>
+<div class="content-wrapper" style="padding-top: 1%;padding-bottom: 1%; 
+background: url(assets/files/gettyimages-1132439283-640x640.jpg) no-repeat center center;
+background-attachment: fixed;
+background-size: cover;width:auto;
+  height: auto;" >
+  <div class="container-fluid">
+
+    <div class="panel panel-primary">
+      <div class="panel-heading" style="height: 50px;">
+        <div class="col-sm-12 pt-3"> 
+          <h3 class="text-primary text-center font-weight-bold">{{'Marksheet Merit List' | translate}}</h3>
+        </div>
+      </div>
+
+      <!-- <div style="margin-left: 87%;" class="pb-2">
+
+        <a href="" (click)="forward( '/jasperReport')" class="btn btn-lg btn-primary " role="button"  target="blank">
+          <span class="fa fa-print mr-1"></span>{{'Print' | translate}}</a>
+      </div> -->
+
+      <div class="p-1">
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped table-hover font-weight-bold grad">
+            <thead class="thead-light text-uppercase">
+              <tr>
+              <th >{{'S.No' | translate}}</th>
+							<th >{{'RollNO' | translate}}  </th>
+							<th >{{'Name' | translate}}</th>
+							<th >{{'Physics' | translate}}</th>
+							<th >{{'Chemistry' | translate}}</th>
+							<th >{{'Maths' | translate}}</th>
+							<th >{{'Total' | translate}}</th>
+							<th >{{'Percentage(%)' | translate}}</th>
+						</tr>
+          </thead>
+
+          <tbody>
+						<tr *ngFor="let m of form.list; let i = index" >
+							<td>{{(form.pageNo*5)+i+ 1}} </td>
+							<td >{{m.rollNo}}</td>
+							<td >{{m.name}}</td>
+							<td >{{m.physics}}</td>
+              <td> {{m.chemistry}}</td>
+              <td> {{m.maths}}</td>
+              <td>{{m.physics+m.maths+m.chemistry}}</td>
+              <td>{{((m.physics+m.maths+m.chemistry)*100)/300 | number:'2.0-2' }}%</td>
+							
+						
+						</tr>
+          </tbody>
+          </table>
+      </div>
+
+      <div *ngIf="form.error" class="alert alert-danger alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{form.message}}
+      </div>
+      <div *ngIf="!form.error && form.message != null" class="alert alert-success alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{form.message}}
+      </div>
+      <div class="p-1">
+        <div class="table-responsive">
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div><app-footer>
+  
+</app-footer>
