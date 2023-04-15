@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"com.rays"},{"l":"com.rays.common"},{"l":"com.rays.common.attachment"},{"l":"com.rays.common.mail"},{"l":"com.rays.common.message"},{"l":"com.rays.config"},{"l":"com.rays.ctl"},{"l":"com.rays.dao"},{"l":"com.rays.dto"},{"l":"com.rays.exception"},{"l":"com.rays.form"},{"l":"com.rays.service"}]
